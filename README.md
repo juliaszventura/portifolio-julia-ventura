@@ -1,7 +1,7 @@
 <div align="center">
 
 # **Portfólio profissional com cena 3D interativa de dados, construído com Three.js e React Three Fiber.**
-Desenvolvido para apresentar minha trajetória, projetos e experiência na área de **Dados & Inteligência Artificial**, com uma cena 3D contínua de partículas conectadas que reage ao scroll.
+Desenvolvido para apresentar minha trajetória, projetos e experiência na área de **Dados & Inteligência Artificial**, com uma cena 3D contínua de partículas conectadas que reagem ao scroll.
 
 </div>
 
@@ -46,7 +46,7 @@ Este é o meu portfólio profissional, desenvolvido para a disciplina de **Proje
 
 * **Sobre Mim:** apresentação pessoal, formação, área de atuação e objetivos profissionais.
 * **Tecnologias:** principais ferramentas e linguagens que utilizo no dia a dia.
-* **Projetos:** linha do tempo dos projetos que desenvolvi, do mais antigo ao mais recente, com tecnologias, link do GitHub e imagens/GIFs em funcionamento.
+* **Projetos:** linha do tempo dos projetos que desenvolvi, do mais antigo ao mais recente, com tecnologias, link do GitHub e imagens do sistema.
 * **Experiência:** histórico de estágios e atuações profissionais.
 * **Contato:** formulário funcional de contato e links diretos para e-mail, LinkedIn e GitHub.
 

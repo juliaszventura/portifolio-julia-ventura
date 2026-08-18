@@ -1,0 +1,99 @@
+import type { SVGProps } from "react";
+
+/**
+ * Ícones da seção Contato (frame 23:579), exportados do próprio Figma nos
+ * tamanhos que o design usa — daí os viewBox irregulares.
+ *
+ * Os de WhatsApp e GitHub são desenhados a traço (1,5) em vez de
+ * preenchidos, e por isso seu box exportado passa do box do node: o traço
+ * centrado vaza metade da espessura para cada lado.
+ *
+ * Todos usam `currentColor`, como ArrowIcon e ProjectIcon — a cor vem do
+ * quadrado que os envolve (branco nos gradientes, #505050 nas redes).
+ */
+type Glifo = {
+  width: number;
+  height: number;
+  stroked?: boolean;
+  evenOdd?: boolean;
+  paths: string[];
+};
+
+function desenhar({ width, height, stroked, evenOdd, paths }: Glifo) {
+  return function Icone(props: SVGProps<SVGSVGElement>) {
+    return (
+      <svg
+        width={width}
+        height={height}
+        viewBox={`0 0 ${width} ${height}`}
+        fill="none"
+        aria-hidden="true"
+        {...props}
+      >
+        {paths.map((d) => (
+          <path
+            key={d}
+            d={d}
+            fill={stroked ? "none" : "currentColor"}
+            fillRule={evenOdd ? "evenodd" : undefined}
+            clipRule={evenOdd ? "evenodd" : undefined}
+            stroke={stroked ? "currentColor" : undefined}
+            strokeWidth={stroked ? 1.5 : undefined}
+            strokeLinecap={stroked ? "round" : undefined}
+            strokeLinejoin={stroked ? "round" : undefined}
+          />
+        ))}
+      </svg>
+    );
+  };
+}
+
+
+/** Vetor 23:565 do Figma. */
+export const EmailIcon = desenhar({
+  width: 20,
+  height: 16,
+  paths: [
+    "M20 2C20 0.9 19.1 0 18 0H2C0.9 0 0 0.9 0 2V14C0 15.1 0.9 16 2 16H18C19.1 16 20 15.1 20 14V2ZM18 2L10 7L2 2H18ZM18 14H2V4L10 9L18 4V14Z",
+  ],
+});
+
+/** Vetor 23:567 do Figma. */
+export const WhatsappIcon = desenhar({
+  width: 19.5009,
+  height: 19.5,
+  stroked: true,
+  paths: [
+    "M13.3505 12.2721C10.9555 14.7921 4.84654 8.73811 7.25054 6.20811C8.71854 4.66311 7.06054 2.89811 6.14254 1.59911C4.41954 -0.835887 0.638535 2.52611 0.752535 4.66511C1.11554 11.4111 8.41254 19.4051 15.4785 18.7071C17.6885 18.4891 20.2285 14.4971 17.6935 13.0381C16.4255 12.3081 14.6845 10.8681 13.3505 12.2711",
+  ],
+});
+
+/** Vetor 23:569 do Figma. */
+export const SendIcon = desenhar({
+  width: 13,
+  height: 13,
+  evenOdd: true,
+  paths: [
+    "M12.8857 2.65594C13.431 1.08642 11.9328 -0.438964 10.3572 0.116655L1.32729 3.29983C-0.406132 3.91046 -0.453291 6.35664 1.25413 7.0356L1.26381 7.03922L4.25845 8.15167C4.53778 8.26473 4.75846 8.49024 4.86609 8.77621L6.02936 11.7145C6.68597 13.4533 9.14432 13.4201 9.75498 11.6637L12.8857 2.65594ZM10.6589 0.972152C11.5023 0.674693 12.33 1.4915 12.0289 2.35848L8.89824 11.3663C8.56571 12.3227 7.23314 12.3397 6.87702 11.3917L5.71375 8.45336C5.66738 8.33084 5.60906 8.21318 5.53962 8.10209L7.72711 5.91408C7.77166 5.87257 7.8074 5.82251 7.83218 5.76688C7.85696 5.71126 7.87029 5.65122 7.87136 5.59033C7.87244 5.52945 7.86124 5.46897 7.83843 5.41251C7.81563 5.35605 7.78168 5.30476 7.73862 5.2617C7.69556 5.21864 7.64427 5.1847 7.58781 5.16189C7.53134 5.13909 7.47086 5.12789 7.40998 5.12896C7.34909 5.13004 7.28904 5.14336 7.23342 5.16815C7.1778 5.19293 7.12773 5.22866 7.08622 5.27321L4.89692 7.46183C4.79978 7.40218 4.697 7.35079 4.58857 7.30766L4.5795 7.30403L1.58486 6.19159C0.659799 5.81916 0.688216 4.48664 1.62839 4.15472L10.6589 0.972152Z",
+  ],
+});
+
+/** Vetor 23:574 do Figma. */
+export const GithubIcon = desenhar({
+  width: 19.3282,
+  height: 20,
+  stroked: true,
+  paths: [
+    "M6.7602 19.25V16.104C6.76022 15.3325 7.02815 14.5849 7.5182 13.989C4.5132 13.589 2.2382 12.13 2.2382 8.191C2.2382 6.525 3.6702 4.301 3.6702 4.301C3.1562 3.171 3.1702 1.217 3.7302 0.750002C3.7302 0.750002 5.6802 0.925002 7.5772 2.5C9.4152 2.005 11.3412 1.946 13.2382 2.5C15.1352 0.925002 17.0862 0.750002 17.0862 0.750002C17.6442 1.217 17.6592 3.172 17.1462 4.301C17.1462 4.301 18.5782 6.525 18.5782 8.191C18.5782 12.131 16.3022 13.589 13.2982 13.989C13.7879 14.585 14.0555 15.3326 14.0552 16.104V19.25",
+    "M0.750196 14.57C0.913196 15.124 1.2132 15.636 1.6282 16.066C2.0422 16.497 2.5602 16.836 3.1412 17.054C3.72607 17.2735 4.35053 17.3677 4.97414 17.3305C5.59775 17.2933 6.20658 17.1255 6.7612 16.838",
+  ],
+});
+
+/** Vetor 23:578 do Figma. */
+export const LinkedinIcon = desenhar({
+  width: 19.06,
+  height: 18.001,
+  paths: [
+    "M4 2.001C3.99974 2.53143 3.78877 3.04004 3.41351 3.41492C3.03825 3.78981 2.52943 4.00027 1.999 4C1.46857 3.99974 0.959965 3.78877 0.585079 3.41351C0.210194 3.03825 -0.000264966 2.52943 2.50362e-07 1.999C0.000265467 1.46857 0.211233 0.959965 0.586494 0.585079C0.961754 0.210194 1.47057 -0.000264966 2.001 2.50362e-07C2.53143 0.000265467 3.04004 0.211233 3.41492 0.586494C3.78981 0.961754 4.00027 1.47057 4 2.001ZM4.06 5.481H0.0600002V18.001H4.06V5.481ZM10.38 5.481H6.4V18.001H10.34V11.431C10.34 7.771 15.11 7.431 15.11 11.431V18.001H19.06V10.071C19.06 3.901 12 4.131 10.34 7.161L10.38 5.481Z",
+  ],
+});

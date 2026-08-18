@@ -31,7 +31,17 @@ export type Projeto = {
   href: string | null;
 };
 
+/** Em ordem cronológica, do mais antigo para o mais recente. */
 export const PROJETOS: Projeto[] = [
+  {
+    slug: "psiplus",
+    nome: "PsiPlus",
+    descricao:
+      "Sistema acadêmico desenvolvido para apoiar processos ligados à Psicologia, com foco em organização de dados e gestão de informações da aplicação.",
+    icone: "psiplus",
+    gradiente: { de: "#aa39f0", para: "#e00e79" },
+    href: "/projetos/psiplus",
+  },
   {
     slug: "real-consult",
     nome: "Real Consult",
@@ -49,14 +59,5 @@ export const PROJETOS: Projeto[] = [
     icone: "marau",
     gradiente: { de: "#386bff", para: "#8a1cf4" },
     href: "/projetos/marau-hospedagens",
-  },
-  {
-    slug: "psiplus",
-    nome: "PsiPlus",
-    descricao:
-      "Sistema acadêmico desenvolvido para apoiar processos ligados à Psicologia, com foco em organização de dados e gestão de informações da aplicação.",
-    icone: "psiplus",
-    gradiente: { de: "#aa39f0", para: "#e00e79" },
-    href: "/projetos/psiplus",
   },
 ];
