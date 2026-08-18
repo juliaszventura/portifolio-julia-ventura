@@ -1,0 +1,44 @@
+@import "tailwindcss";
+
+/* Tema único e fixo: escuro. O site NÃO acompanha a preferência do sistema —
+   não existe bloco @media (prefers-color-scheme) nem classe `dark:` no projeto.
+   `color-scheme: dark` estende isso à UI nativa do browser (barra de rolagem,
+   campos de formulário, autofill), que senão viria clara em quem usa o SO no
+   tema claro. */
+:root {
+  color-scheme: dark;
+
+  /* Reaproveita o token do Figma logo abaixo em vez de repetir o hex: a
+     superfície da página é a mesma da navbar. */
+  --background: var(--color-nav-surface);
+  --foreground: #ffffff;
+}
+
+@theme inline {
+  --color-background: var(--background);
+  --color-foreground: var(--foreground);
+  --font-sans: var(--font-geist-sans);
+  --font-mono: var(--font-geist-mono);
+}
+
+/* Tokens extraídos do Figma — frame "Menu" (node 1:1010).
+   Nenhum valor aqui é arbitrário: cores conferidas no render do próprio Figma. */
+@theme {
+  --color-nav-surface: #000205;
+  --color-nav-line: #191919;
+  --color-brand: #8a0ef5;
+  --color-cta-start: #4b63fd;
+  --color-cta-end: #8f05f4;
+
+  --font-jakarta: var(--font-plus-jakarta-sans);
+  --font-poppins: var(--font-poppins-sans);
+
+  --shadow-cta: 0px 4px 4px 0px rgb(0 0 0 / 0.25);
+  --text-shadow-logo: 0px 4px 4px rgb(0 0 0 / 0.25);
+}
+
+body {
+  background: var(--background);
+  color: var(--foreground);
+  font-family: Arial, Helvetica, sans-serif;
+}
