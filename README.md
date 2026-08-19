@@ -152,7 +152,7 @@ http://localhost:3000
 - [x] Planejamento e prototipação (Figma) — Lab01S01
 - [x] Implementação das funcionalidades principais — Lab01S02
   - [x] Navbar, cena 3D de fundo e todas as seções da home
-  - [x] Página de detalhe de projeto, com rotas estáticas para os três projetos
+  - [ ] Página de detalhe de projeto, com rotas estáticas para os três projetos
   - [ ] Envio real do formulário de contato (serviço de e-mail a definir)
   - [ ] Imagens e links de repositório dos projetos
 - [ ] Hospedagem e finalização — Lab01S03
