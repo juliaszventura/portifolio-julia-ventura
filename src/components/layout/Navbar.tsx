@@ -7,7 +7,6 @@ import CtaButton from "@/components/ui/CtaButton";
 const NAV_HEIGHT = 64;
 const CONTAINER_MAX_WIDTH = "max-w-[1033px]";
 
-/** Distância de rolagem em que a navbar troca de transparente para glass. */
 const SCROLL_THRESHOLD = 50;
 
 type NavSection = {
@@ -69,8 +68,6 @@ export default function Navbar() {
 
   useEffect(() => {
     const handleScroll = () => setIsScrolled(window.scrollY > SCROLL_THRESHOLD);
-
-    // Roda uma vez: a página pode carregar já rolada (F5 no meio, link com hash).
     handleScroll();
     window.addEventListener("scroll", handleScroll, { passive: true });
     return () => window.removeEventListener("scroll", handleScroll);
@@ -101,7 +98,6 @@ export default function Navbar() {
     (event: React.MouseEvent<HTMLAnchorElement>, id: string) => {
       const target = document.getElementById(id);
 
-      // Sem a seção na página, deixa o href="#id" se virar sozinho.
       if (!target) return;
 
       event.preventDefault();
@@ -122,14 +118,6 @@ export default function Navbar() {
     [],
   );
 
-  // O gradiente e o `bg-clip-text` ficam SEMPRE aplicados; o que anima é só a
-  // `color`, de branco opaco para transparente. Enquanto a cor é opaca ela cobre
-  // o gradiente recortado nos glifos, e ao desvanecer o gradiente aparece por
-  // baixo — isso dá um crossfade real. Alternar `text-transparent` no hover não
-  // interpolaria: o texto saltaria de branco para gradiente.
-  //
-  // O link ativo continua em ExtraBold no hover: cair para `font-bold` (700)
-  // deixaria ele mais leve do que em repouso (800).
   const renderSectionLink = (section: NavSection) => {
     const isActive = activeId === section.id;
 
@@ -152,8 +140,6 @@ export default function Navbar() {
     );
   };
 
-  // O fundo precisa ficar sólido também com o menu mobile aberto, senão o painel
-  // fica ilegível por cima do conteúdo quando ainda se está no topo da página.
   const hasSurface = isScrolled || isMenuOpen;
 
   return (
@@ -161,9 +147,6 @@ export default function Navbar() {
       initial={{ y: shouldReduceMotion ? 0 : -100 }}
       animate={{ y: 0 }}
       transition={{ duration: 0.5, ease: [0.16, 1, 0.3, 1] }}
-      // A transição de CSS lista só as propriedades do efeito glass. Um
-      // `transition-all` aqui pegaria também o `transform` que a motion escreve
-      // a cada frame na entrada, e a animação sairia arrastada.
       className={`sticky top-0 z-50 w-full border-b font-jakarta transition-[background-color,backdrop-filter,border-color] duration-300 ${
         hasSurface
           ? "border-nav-line bg-nav-surface/80 backdrop-blur-md"
@@ -238,8 +221,6 @@ export default function Navbar() {
             animate={{ height: "auto", opacity: 1 }}
             exit={{ height: 0, opacity: 0 }}
             transition={{ duration: 0.3, ease: "easeInOut" }}
-            // `overflow-hidden` é o que faz o height animar sem vazar conteúdo,
-            // e a borda vai no <nav> para não virar um risco de 1px em height 0.
             className="overflow-hidden md:hidden"
           >
             <nav

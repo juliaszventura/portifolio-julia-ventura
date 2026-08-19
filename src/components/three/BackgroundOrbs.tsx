@@ -2,25 +2,14 @@
 
 import { motion, useReducedMotion, useScroll, useTransform } from "motion/react";
 
-/**
- * BackgroundOrbs — as três elipses desfocadas do hero do Figma
- * (frame "Portifólio Web", nós 1:889, 1:972 e 1:974), fixas atrás do conteúdo.
- *
- * Cores e dimensões vêm direto do SVG exportado de cada elipse.
- */
-
 type OrbConfig = {
-  /** Nó no Figma, para rastrear a origem de cada valor. */
   nodeId: string;
-  /** Cor exata do `fill` da elipse no Figma. */
   color: string;
   opacity: number;
   width: number;
   height: number;
-  /** x do Figma como fração dos 1280px do frame; y em px a partir do topo. */
   left: string;
   top: number;
-  /** Fração da velocidade do scroll com que a bolha se desloca. */
   parallaxFactor: number;
   drift: {
     x: number[];
@@ -85,16 +74,12 @@ function Orb({ orb }: { orb: OrbConfig }) {
   const shouldReduceMotion = useReducedMotion();
   const { scrollY } = useScroll();
 
-  // `fixed` já deixa a bolha parada enquanto o conteúdo rola a 1x. Deslocar por
-  // -scrollY * fator faz ela subir a essa fração da velocidade da página.
   const parallaxY = useTransform(
     scrollY,
     (value) => -value * orb.parallaxFactor,
   );
 
   return (
-    // Duas camadas de propósito: o parallax de scroll e a deriva contínua
-    // escrevem os dois em `transform`. Na mesma div uma sobrescreveria a outra.
     <motion.div
       className="absolute"
       style={{

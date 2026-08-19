@@ -6,59 +6,25 @@ import type { ReactNode } from "react";
 import ArrowIcon from "@/components/ui/ArrowIcon";
 import FadeInUp from "@/components/ui/FadeInUp";
 
-/**
- * Sobre Mim — frames "Sobre Mim" (node 5:178, 1040 × 367) e "Codigo Sobre"
- * (node 5:173, 201 × 195).
- *
- * O card do código não é filho do card preto: no Figma ele está 24px acima e
- * 24px à esquerda dele, sobrando para fora por cima do brilho roxo. Por isso
- * os dois são irmãos aqui, com o card de código posicionado em absolute.
- *
- * A partir de `xl` (1280px, a menor largura que comporta os 1040 do card mais
- * as duas sobras de 24px) a composição é a do Figma, com cada peça na sua
- * coordenada exata; abaixo disso tudo empilha em fluxo normal.
- *
- * Medidas confirmadas no metadata e conferidas pixel a pixel no render:
- *   brilho ........... 312 × 314 em (15, 32), blur 25 (ver Glow: ampliado a pedido)
- *   foto ............. 271 × 271 em (106, 96), sombra 10/10/50 preto 50%
- *   bandeiras ........ 35 × 35 em (889, 44) e (933, 44)
- *   "Sobre Mim" ...... Poppins Bold 24px / leading 63,357 em (370, 62)
- *   parágrafo ........ Poppins Regular 13px / leading 15, #8e97a4, 598 de largura, em (370, 129)
- *   links sociais .... linha de 31px em (425, 292); o segundo grupo começa em 674
- *
- * A seção inteira é client porque as bandeiras trocam o idioma de textos que
- * ficam espalhados por ela (título, parágrafo, links). O ancestral comum
- * desses pedaços é o próprio card, então não sobra nada de servidor para
- * isolar — quebrar em wrappers só criaria indireção sem economizar bundle.
- */
-
 const LINKEDIN_URL = "https://www.linkedin.com/in/juliadesouzaventura/";
 const GITHUB_URL = "https://github.com/juliaszventura";
 
 type Language = "pt" | "en";
 
 type Copy = {
-  /** Valor do atributo `lang` do bloco de texto. */
   htmlLang: string;
   title: string;
   bio: string;
-  /** O segundo parágrafo é "{focusIntro} A, B {focusJoin} C." */
   focusIntro: string;
   focusAreas: [string, string, string];
   focusJoin: string;
   linkedinLabel: string;
   githubLabel: string;
   photoAlt: string;
-  /** Rótulos acessíveis das bandeiras, escritos no idioma vigente. */
   switchToPt: string;
   switchToEn: string;
 };
 
-/**
- * Os textos em português são os do Figma, palavra por palavra. A versão em
- * inglês é tradução direta deles — se a Júlia tiver um texto próprio em
- * inglês, é só substituir aqui que o layout não muda.
- */
 const COPY: Record<Language, Copy> = {
   pt: {
     htmlLang: "pt-BR",
@@ -94,31 +60,9 @@ const COPY: Record<Language, Copy> = {
   },
 };
 
-/**
- * Brilho por trás da foto (Ellipse 35).
- *
- * O Figma tem uma elipse de 312 × 314 em (15, 32) com gradiente LINEAR a
- * 109,1° (#505FFD 50% → #8B0BF4 50% → preto) e blur de 25. Esta versão
- * diverge do arquivo de propósito, a pedido: gradiente radial, 440 × 440 e
- * centro mais alto. As duas cores continuam sendo as do design, e o
- * `blur-[25px]` é o stdDeviation original.
- *
- * O último stop é `rgb(80 95 253 / 0)` e não `transparent` porque a palavra-
- * chave pode ser interpolada passando por preto transparente e deixar um halo
- * acinzentado na borda.
- */
 const GLOW_GRADIENT =
   "radial-gradient(circle closest-side, rgb(160 60 255 / 0.55) 0%, rgb(139 11 244 / 0.45) 32%, rgb(80 95 253 / 0.18) 60%, rgb(80 95 253 / 0) 82%)";
 
-/**
- * Fica dentro do container da foto para acompanhá-la no empilhado, então os
- * offsets do `xl` são medidos a partir dela, não do card. Como a foto está em
- * (106, 96), o alvo de (−49, −40) no card vira (−155, −136) aqui.
- *
- * Com o raio visível terminando em 82% de 220px, a bolha some 180px depois do
- * centro (171, 180): ela ocupa y 0→360 dentro dos 367 do card e só o que já
- * está transparente encosta no `overflow-hidden`, sem linha de corte à vista.
- */
 function Glow() {
   return (
     <div
@@ -129,15 +73,6 @@ function Glow() {
   );
 }
 
-/**
- * Bandeira clicável. A imagem entra como background porque o <img> comum
- * dispararia aviso do eslint-config-next e o next/image só serve SVG com
- * `dangerouslyAllowSVG`; o nome acessível vem do aria-label do botão.
- *
- * O anel do estado ativo é `ring`, ou seja, box-shadow: desenha para fora da
- * caixa sem ocupar espaço, então as bandeiras continuam 35 × 35 nas
- * coordenadas do Figma.
- */
 function FlagButton({
   src,
   label,
@@ -193,17 +128,11 @@ function SocialLink({
         className="shrink-0 object-contain"
       />
       {children}
-      {/* No Figma a seta é a mesma do Hero, girada -38,16° (↗). */}
       <ArrowIcon className="shrink-0 -rotate-[38.16deg] transition-transform group-hover:translate-x-[2px] group-hover:-translate-y-[2px]" />
     </a>
   );
 }
 
-/**
- * Card "Codigo Sobre" (201 × 195). Tamanho fixo e conteúdo em absolute: é um
- * enfeite com as linhas nas coordenadas do Figma, não um bloco de texto que
- * precise refluir.
- */
 function CodeCard({ className }: { className?: string }) {
   return (
     <div
@@ -212,7 +141,6 @@ function CodeCard({ className }: { className?: string }) {
     >
       <div className="relative size-full">
         <span className="absolute left-[16px] top-[11px]">&lt;/&gt; Code</span>
-        {/* Ellipse 36: preenchimento #3b734a com contorno #051012 */}
         <span className="absolute left-[173px] top-[11px] size-[11px] rounded-full border-[0.5px] border-[#051012] bg-[#3b734a]" />
         <span className="absolute inset-x-0 top-[35px] h-px bg-[#242833]/50" />
 
@@ -254,10 +182,7 @@ export default function SobreMim() {
       <FadeInUp className="relative mx-auto w-full max-w-[1040px]">
         <CodeCard className="relative z-20 mx-auto mb-6 xl:absolute xl:-left-[24px] xl:-top-[24px] xl:mx-0 xl:mb-0" />
 
-        {/* `overflow-hidden` prende o brilho dentro do retângulo: sem ele o
-            blur de 25px vaza pela esquerda e pelo topo do card. */}
         <div className="relative overflow-hidden rounded-[30px] bg-black px-6 py-12 xl:h-[367px] xl:px-0 xl:py-0">
-          {/* Bandeiras — canto superior direito, 72px da borda (1040 − 968). */}
           <div
             role="group"
             aria-label={
@@ -265,10 +190,6 @@ export default function SobreMim() {
                 ? "Idioma do texto desta seção"
                 : "Language of this section"
             }
-            // z-30 e não z-10: a caixa do <h2> ocupa a coluna de texto inteira
-            // (x 370→968, y 62→125) e encosta na faixa das bandeiras (y 44→79).
-            // Empatados no z-index, quem vem depois no DOM ganha — o título
-            // ficava por cima e comia o clique nas bandeiras.
             className="relative z-30 mb-8 flex justify-center gap-[9px] xl:absolute xl:right-[72px] xl:top-[44px] xl:mb-0"
           >
             <FlagButton
@@ -285,8 +206,6 @@ export default function SobreMim() {
             />
           </div>
 
-          {/* A foto é esticada para o quadrado de 271 × 271 (object-fill), como
-              no Figma — a origem é 830 × 1024 e o design não recorta. */}
           <div className="relative z-10 mx-auto mb-10 h-[271px] w-[271px] xl:absolute xl:left-[106px] xl:top-[96px] xl:mx-0 xl:mb-0">
             <Glow />
             <Image
@@ -306,14 +225,8 @@ export default function SobreMim() {
               {copy.title}
             </h2>
 
-            {/* No Figma o parágrafo começa em y=129; o h2 acima termina em
-                125,36 (62 + 63,357), daí os 3,64 que faltam. */}
-            {/* A largura de 598px do design também serve de teto no empilhado:
-                sem ela a linha esticaria até quase 1000px e ficaria ilegível. */}
             <div className="mx-auto mt-6 max-w-[598px] text-justify text-[13px] font-normal leading-[15px] text-[#8e97a4] xl:mx-0 xl:mt-[3.64px] xl:w-[598px]">
               <p>{copy.bio}</p>
-              {/* A linha em branco entre os parágrafos é uma linha de texto
-                  vazia no Figma — mesmos 15px de leading. */}
               <p className="mt-[15px]">
                 {copy.focusIntro}
                 <span className="font-semibold text-white">
@@ -331,9 +244,6 @@ export default function SobreMim() {
               </p>
             </div>
 
-            {/* Os dois grupos ficam em (425, 292) e (674, 292): a diferença de
-                249px vira a largura do primeiro item, para o segundo cair no
-                lugar exato sem depender da medida do texto. */}
             <div className="mt-10 flex flex-wrap items-center justify-center gap-x-6 gap-y-4 xl:absolute xl:left-[425px] xl:top-[292px] xl:mt-0 xl:h-[31px] xl:flex-nowrap xl:gap-0">
               <SocialLink
                 href={LINKEDIN_URL}

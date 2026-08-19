@@ -9,24 +9,9 @@ import {
 import RevealOnScroll from "@/components/ui/RevealOnScroll";
 import { CONTATO } from "@/data/contato";
 
-/**
- * Contato — frame "Contato" (node 23:579, 1002 × 583).
- *
- * Medidas confirmadas no metadata:
- *   título ....... Poppins ExtraBold 40px / leading 63,357, "Algo Juntos" em gradiente
- *   subtítulo .... Poppins Regular 15px / leading 20, #8e97a4, 10px abaixo — o mesmo
- *                  par das outras seções
- *   colunas ...... duas de 481 com 40 de intervalo, começando 62px abaixo do subtítulo
- *   card ......... fundo #090909 a 30%, borda 1px #1e1e1e; raio 24 no formulário e 18 nos da direita
- *   quadrado ..... 40 × 39, raio 10, gradiente 135,44° de 9,49% a 92,41%
- *   rótulo ....... Poppins SemiBold 13px branco; valor Poppins Regular 12px #8e97a4
- */
-
-/** Gradiente do "Algo Juntos": #bd6bfd até 34,615%, daí para #e7006b. */
 const TITULO_GRADIENTE =
   "linear-gradient(to right, #bd6bfd 34.615%, #e7006b 100%)";
 
-/** Ângulo e paradas são os mesmos nos dois quadrados; só as cores mudam. */
 function gradienteDoIcone(de: string, para: string) {
   return `linear-gradient(135.4373617330866deg, ${de} 9.4898%, ${para} 92.414%)`;
 }
@@ -34,7 +19,6 @@ function gradienteDoIcone(de: string, para: string) {
 const CARD_CLASSNAME =
   "rounded-[18px] border border-[#1e1e1e] bg-[rgb(9_9_9/0.3)]";
 
-/** Card de um canal: quadrado com gradiente, rótulo e valor clicável. */
 function CanalDeContato({
   Icone,
   gradiente,
@@ -50,7 +34,6 @@ function CanalDeContato({
 }) {
   return (
     <div className={`${CARD_CLASSNAME} flex gap-[18px] px-[24px] py-[20px]`}>
-      {/* O quadrado fica 3px abaixo do rótulo no design, daí o mt. */}
       <span
         className="mt-[3px] flex h-[39px] w-[40px] shrink-0 items-center justify-center rounded-[10px] text-white"
         style={{ backgroundImage: gradiente }}
@@ -75,7 +58,6 @@ function CanalDeContato({
   );
 }
 
-/** Quadrado de rede social: mesmo tamanho dos outros, mas sem gradiente. */
 function RedeSocial({
   Icone,
   href,
@@ -119,14 +101,11 @@ export default function Contato() {
           </p>
         </RevealOnScroll>
 
-        {/* Formulário e coluna da direita têm 481 cada, com 40 de intervalo. */}
         <div className="mt-[62px] grid grid-cols-1 gap-[40px] lg:grid-cols-2">
           <RevealOnScroll>
             <ContatoFormulario />
           </RevealOnScroll>
 
-          {/* 22px entre os cards da direita; o atraso escalonado é o mesmo
-              padrão das Experiências. */}
           <div className="space-y-[22px]">
             <RevealOnScroll delay={0.1}>
               <CanalDeContato

@@ -1,23 +1,11 @@
 import type { SVGProps } from "react";
 
-/**
- * Glifos dos quadrados coloridos dos cards de Projetos (frame 45:853).
- *
- * São os vetores exportados do próprio Figma, cada um no tamanho que o
- * design usa — daí os viewBox diferentes. O de PsiPlus é desenhado a traço
- * (stroke 2), e não preenchido, e por isso seu box exportado é 29 × 29:
- * o traço centrado vaza 1px além dos 27 × 27 do node.
- *
- * A cor sai de `currentColor` para vir do quadrado, como em ArrowIcon.
- */
 export type ProjectIconName = "realconsult" | "marau" | "psiplus";
 
 type Glyph = {
   width: number;
   height: number;
-  /** Node do vetor no Figma. */
   nodeId: string;
-  /** Desenhado a traço em vez de preenchido. */
   stroked?: boolean;
   paths: string[];
 };

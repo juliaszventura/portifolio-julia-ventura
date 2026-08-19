@@ -15,21 +15,11 @@ const geistMono = Geist_Mono({
   subsets: ["latin"],
 });
 
-// Fonte do design: Plus Jakarta Sans nos pesos usados pelo frame "Menu"
-// — Regular (links), Bold (Contato) e ExtraBold (logo JV e link ativo).
-// Sem `weight`, o next/font entrega a versão VARIÁVEL da Plus Jakarta Sans
-// (eixo wght 200–800). Isso cobre os pesos do design (400/700/800) e ainda
-// permite que o `font-weight` do hover da navbar interpole em vez de saltar —
-// com instâncias estáticas a transição de peso não é animável.
 const plusJakartaSans = Plus_Jakarta_Sans({
   variable: "--font-plus-jakarta-sans",
   subsets: ["latin"],
 });
 
-// Fonte do Hero no Figma. A Poppins não tem versão variável no Google Fonts,
-// então os pesos usados pelo design precisam ser listados um a um.
-// O 800 entrou com o título "Explore meus Projetos", que o design pede em
-// ExtraBold: sem ele o browser engorda o 700 sinteticamente.
 const poppins = Poppins({
   variable: "--font-poppins-sans",
   subsets: ["latin"],

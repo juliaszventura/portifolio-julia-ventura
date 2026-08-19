@@ -3,20 +3,6 @@
 import { useState, type FormEvent } from "react";
 import { SendIcon } from "@/components/ui/ContatoIcons";
 
-/**
- * Formulário do frame Contato (23:579).
- *
- * Client porque guarda o estado do envio. O envio de verdade ainda não está
- * decidido: `onSubmit` só barra o comportamento padrão e marca como enviado.
- * Ao plugar um serviço, é aqui que entra a chamada — o resto da UI não muda.
- *
- * Medidas do Figma, relativas ao card de 481 × 427:
- *   rótulo ..... Poppins Regular 12px / leading 20, #cacfd6
- *   campo ...... 425 × 41, raio 10, fundo #191919, borda 1px #303030
- *   textarea ... 425 × 118
- *   botão ...... 425 × 45, raio 10, gradiente #00add4 → #9001f3
- */
-
 const CAMPO_CLASSNAME =
   "w-full rounded-[10px] border border-[#303030] bg-[#191919] text-[12px] " +
   "leading-[20px] text-white placeholder:text-[#5f6776] " +
@@ -28,8 +14,6 @@ export default function ContatoFormulario() {
   const [enviado, setEnviado] = useState(false);
 
   function handleSubmit(event: FormEvent<HTMLFormElement>) {
-    // Sem `preventDefault` o browser navegaria; os `required` dos campos já
-    // barram o submit antes de chegar aqui.
     event.preventDefault();
     // TODO: ligar no serviço de e-mail quando escolhermos qual.
     setEnviado(true);
@@ -77,8 +61,6 @@ export default function ContatoFormulario() {
         required
         rows={5}
         placeholder="Me conte sobre o seu projeto..."
-        // `block` mata o espaço de descida que o textarea, sendo inline-block,
-        // acrescenta embaixo — sem isso o botão desce ~6,5px do lugar.
         className={`${CAMPO_CLASSNAME} mt-[5px] block h-[118px] resize-none px-[18px] py-[11px]`}
       />
 
@@ -90,8 +72,6 @@ export default function ContatoFormulario() {
         <SendIcon />
       </button>
 
-      {/* Texto meu, não do Figma — o design não tem estado de pós-envio.
-          Some quando o serviço real entrar. */}
       {enviado && (
         <p
           role="status"

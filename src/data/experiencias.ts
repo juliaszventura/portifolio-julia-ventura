@@ -1,12 +1,4 @@
-/**
- * Experiências da seção "Conheça minha Trajetória" (frame 19:463).
- *
- * Ordem, cargos, empresas, períodos e descrições vieram do Figma, palavra por
- * palavra. Para adicionar uma experiência basta somar um objeto: a linha do
- * tempo, os pontos e o atraso progressivo da animação saem da lista.
- */
 export type Experiencia = {
-  /** Identidade estável; também serve de key na lista. */
   slug: string;
   cargo: string;
   empresa: string;

@@ -8,8 +8,6 @@ import Tecnologias from "@/components/sections/Tecnologias";
 
 export default function Home() {
   return (
-    // O rodapé fica fora do <main>: é conteúdo da página, mas não do
-    // conteúdo principal dela.
     <>
       <main>
         <Hero />

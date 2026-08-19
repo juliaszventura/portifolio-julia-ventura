@@ -1,16 +1,5 @@
 import type { SVGProps } from "react";
 
-/**
- * Ícones da seção Contato (frame 23:579), exportados do próprio Figma nos
- * tamanhos que o design usa — daí os viewBox irregulares.
- *
- * Os de WhatsApp e GitHub são desenhados a traço (1,5) em vez de
- * preenchidos, e por isso seu box exportado passa do box do node: o traço
- * centrado vaza metade da espessura para cada lado.
- *
- * Todos usam `currentColor`, como ArrowIcon e ProjectIcon — a cor vem do
- * quadrado que os envolve (branco nos gradientes, #505050 nas redes).
- */
 type Glifo = {
   width: number;
   height: number;
@@ -49,7 +38,6 @@ function desenhar({ width, height, stroked, evenOdd, paths }: Glifo) {
 }
 
 
-/** Vetor 23:565 do Figma. */
 export const EmailIcon = desenhar({
   width: 20,
   height: 16,
@@ -58,7 +46,6 @@ export const EmailIcon = desenhar({
   ],
 });
 
-/** Vetor 23:567 do Figma. */
 export const WhatsappIcon = desenhar({
   width: 19.5009,
   height: 19.5,
@@ -68,7 +55,6 @@ export const WhatsappIcon = desenhar({
   ],
 });
 
-/** Vetor 23:569 do Figma. */
 export const SendIcon = desenhar({
   width: 13,
   height: 13,
@@ -78,7 +64,6 @@ export const SendIcon = desenhar({
   ],
 });
 
-/** Vetor 23:574 do Figma. */
 export const GithubIcon = desenhar({
   width: 19.3282,
   height: 20,
@@ -89,7 +74,6 @@ export const GithubIcon = desenhar({
   ],
 });
 
-/** Vetor 23:578 do Figma. */
 export const LinkedinIcon = desenhar({
   width: 19.06,
   height: 18.001,

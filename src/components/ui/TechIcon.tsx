@@ -1,24 +1,11 @@
 import type { SVGProps } from "react";
 
-/**
- * Marcas das tecnologias do frame "Tecnologias" (node 37:615).
- *
- * Os paths são os vetores exportados do próprio Figma — as marcas oficiais,
- * já nas dimensões que o design usa. Cada `width`/`height` é o tamanho do
- * vetor no arquivo, e o viewBox é o mesmo: os ícones saem em escala 1:1 com
- * o design, sem reescala.
- *
- * Vivem aqui, e não em Tecnologias.tsx, porque são ~16KB de path data que
- * afogariam a seção.
- */
 export type Technology = {
   name: string;
-  /** Node do vetor no Figma. */
   nodeId: string;
   width: number;
   height: number;
   path: string;
-  /** MySQL é o único desenhado com furo (evenodd). */
   evenOdd?: boolean;
 };
 
@@ -75,10 +62,6 @@ export const TECHNOLOGIES: Technology[] = [
   },
 ];
 
-/**
- * O `fill` é `currentColor` para a cor vir do card (o #898a8c do design),
- * igual ao que ArrowIcon já faz.
- */
 export function TechIcon({
   technology,
   ...props
