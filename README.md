@@ -12,7 +12,6 @@ Desenvolvido para apresentar minha trajetória, projetos e experiência na área
 ![TypeScript](https://img.shields.io/badge/TypeScript-5.x-blue.svg)
 ![Three.js](https://img.shields.io/badge/Three.js-r160-black.svg)
 ![Tailwind](https://img.shields.io/badge/Tailwind_CSS-3.x-38bdf8.svg)
-![License](https://img.shields.io/badge/license-MIT-green.svg)
 
 </div>
 
@@ -126,8 +125,8 @@ src/
 
 \`\`\`bash
 # 1. Clone o repositório
-git clone https://github.com/juliaszventura/SEU-REPOSITORIO.git
-cd SEU-REPOSITORIO
+git clone https://github.com/juliaszventura/portifolio-julia-ventura.git
+cd portifolio-julia-ventura
 
 # 2. Instale as dependências
 npm install
